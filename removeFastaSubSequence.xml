@@ -1,0 +1,88 @@
+
+<tool id="removeFastaSubSequence" name="Remove Fasta Substring Sequence" version="1.0.0">
+  <description>Removes sequences that are subsequence in a reference Fasta File.</description>
+  <requirements>
+      <requirement type="package" version="1.70">biopython</requirement>
+  </requirements>
+  <command interpreter="python"><![CDATA[removeFastaSubSequence.py $ref_fastafile $query_fastafile $output]]></command>
+  <inputs>
+    <param name="ref_fastafile" type="data" format="fasta">
+      <label>Input Reference Fasta File</label>
+    </param>
+    <param name="query_fastafile" type="data" format="fasta">
+      <label>Input Query Fasta File</label>
+    </param>
+  </inputs>
+
+  <outputs>
+    <data format="fasta" name="output" label="uniqSeq_${query_fastafile.name.rsplit('.',1)[0]}.fasta" />
+  </outputs>
+  
+  <tests> 
+    <test>
+      <param name="ref_fastafile" value="test_ref.fasta" />
+      <param name="query_fastafile" value="test_query.fasta" />
+      <output name="output" file="uniqSeq_test_query.fasta">
+        <assert_contents>
+            <has_text text="ENSMUST00000193003" />
+        </assert_contents>
+      </output>
+    </test>
+  </tests>
+  
+  
+  <help>
+This program removes the sequences from the query fasta file that are present as subsequence in a reference fasta file.
+
+EXAMPLE:
+
+----
+
+Ref sequences:
+
+>reference_seq_1
+
+TSLDKDHLELCCTLSLPFSWACSWVLVLRLSINGQLPRSRLWAAHCLWGVP
+
+>reference_seq_2
+
+RGLCISGLEKEVQVQSRQAEGPVHLWLRKGSTSAE
+
+----
+
+Query Sequences:
+
+>query_seq_1
+
+TKTILNYAVLSPCLSPGHVLGC
+
+
+>query_seq_2
+
+LDKDHLELCCTLSLPFSWACSWVLVL
+
+
+>query_seq_3
+
+LWGVPRGLCISG
+
+----
+
+Output Sequences:
+
+>query_seq_1
+
+TKTILNYAVLSPCLSPGHVLGC
+
+
+>query_seq_3
+
+LWGVPRGLCISG
+
+----
+
+Output Sequence file will have only query_seq_1 and query_seq_3. query_seq_2 is removed because query_seq_2's sequence "LDKDHLELCCTLSLPFSWACSWVLVL" is 
+present as substring in reference_seq_1's sequence "TSLDKDHLELCCTLSLPFSWACSWVLVLRLSINGQLPRSRLWAAHCLWGVP".
+
+  </help>
+</tool>
