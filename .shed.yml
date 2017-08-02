@@ -1,0 +1,11 @@
+categories: [Proteomics]
+description: Removes sequences that are subsequence in a reference Fasta File
+long_description: |
+    This program removes the sequences from the query fasta file that are present in a reference fasta file (removes even those query sequences that are present as substring in reference fasta file).
+    
+    Input: Reference and Query Fasta Files
+    Output: Fasta File with sequences that are unique to Query Fasta File.
+    
+    P.S. : Requires Biopython
+name: remove_fasta_subsequences
+owner: pravs
