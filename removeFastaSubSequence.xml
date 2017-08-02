@@ -1,6 +1,6 @@
 
 <tool id="removeFastaSubSequence" name="Remove Fasta Substring Sequence" version="1.0.0">
-  <description>Removes sequences that are subsequence in a reference Fasta File.</description>
+  <description>Removes sequences from query fasta file that are present in a reference Fasta File.</description>
   <requirements>
       <requirement type="package" version="1.70">biopython</requirement>
   </requirements>
@@ -32,7 +32,7 @@
   
   
   <help>
-This program removes the sequences from the query fasta file that are present as subsequence in a reference fasta file.
+This program removes the sequences from the query fasta file that are present in a reference fasta file (removes even those query sequences that are present as substring in reference fasta file).
 
 EXAMPLE:
 
